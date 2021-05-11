@@ -1,0 +1,54 @@
+<template>
+    <lightning-record-edit-form object-api-name="AssetLiability__c" onsuccess={handleSuccess}>
+				<lightning-card title="" class="slds-m-around_medium">
+								<h3 class="slds-page-header__title">Add Aseet/Liability</h3>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-input-field field-name="Type__c" onchange={saveTypeValue}>
+                        </lightning-input-field>
+										</div>
+                    <div class="slds-col slds-size_1-of-2">
+                            <lightning-input-field field-name="Name" >
+                            </lightning-input-field>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-input-field field-name="Balance__c">
+                        </lightning-input-field>
+										</div>
+								</div>
+				</lightning-card>
+       	</br>
+        <center>
+            <lightning-button type="submit" label="Save" class="slds-m-top_medium slds-m-around_small" variant="brand">
+            </lightning-button>
+				</center>
+        <br/>
+		</lightning-record-edit-form>
+<lightning-card title="Asset/Liability Details" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+            <template if:true={assetData.data}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={assetData.data}
+                    columns={columns}
+										hide-checkbox-column
+										onrowaction={handleRowAction}
+                    draft-values={draftValues}>
+                </lightning-datatable>
+            </template>
+			 </div>
+    </br></br>
+    <div class="slds-grid">
+        <div class="slds-col slds-size_2-of-3"></div>
+        <div class="slds-col slds-size_1-of-3">
+						<p><b>Net Worth : <template if:true = {showNegativeSign}>-</template>{netWorth}</b></p>
+						</br>
+           <p><b>Assets Total : {assetTotal}</b></p>
+					</br>
+           <p><b>Liabilities Total : {liabilityTotal}</b></p>
+        </div>
+    </div>
+    </lightning-card>
+</template>
